@@ -1,10 +1,10 @@
 import React from 'react';
 
 const Login = () => {
+
   const loginWithGoogle = () => {
     window.location.href = "https://xeno-crm-2mi6.vercel.app/auth/google";
-  };
-
+  }
   return (
     <div className="flex items-center justify-center h-screen bg-slate-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-96 flex flex-col items-center">
