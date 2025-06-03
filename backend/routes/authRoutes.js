@@ -1,6 +1,9 @@
 const express = require("express");
 const passport = require("passport");
 const router = express.Router();
+require("../utils/passportConfig"); // Your Google strategy setup
+app.use(passport.initialize());
+app.use(passport.session()); // Only if using sessions
 
 router.get("/google", passport.authenticate("google", { scope: ["profile", "email"] }));
 
