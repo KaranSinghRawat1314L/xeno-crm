@@ -25,6 +25,15 @@ app.use(cors({
   origin: process.env.CLIENT_URL,
   credentials: true
 }));
+app.use(session({
+  secret: process.env.SESSION_SECRET || "your-secret-key",
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === "production", // true if using HTTPS
+    sameSite: "lax"
+  }
+}));
 app.use(passport.initialize()); // Added
 
 // MongoDB connection
