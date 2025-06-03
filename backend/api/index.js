@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
+const passport = require("passport"); // Added
 require("dotenv").config();
 
 // Import your route files
@@ -10,17 +11,22 @@ const campaignRoutes = require("../routes/campaignRoutes");
 const deliveryRoutes = require("../routes/deliveryRoutes");
 const aiRoutes = require("../routes/aiRoutes");
 const vendorRoutes = require("../routes/vendorRoutes");
+const authRoutes = require("../routes/authRoutes"); // Added
+
+// Passport config (e.g., Google OAuth)
+require("../utils/passportConfig"); // Added
 
 const app = express();
 
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: process.env.CLIENT_URL, // e.g., https://your-frontend.vercel.app
+  origin: process.env.CLIENT_URL,
   credentials: true
 }));
+app.use(passport.initialize()); // Added
 
-// MongoDB connection (avoid multiple connections in serverless)
+// MongoDB connection
 if (!mongoose.connection.readyState) {
   mongoose.connect(process.env.MONGO_URI)
     .then(() => console.log("MongoDB Atlas connected!"))
@@ -36,10 +42,7 @@ app.use("/api/campaigns", campaignRoutes);
 app.use("/api/delivery", deliveryRoutes);
 app.use("/api/ai", aiRoutes);
 app.use("/api/vendor", vendorRoutes);
-app.get("/api/auth/check", (req, res) => {
-  if (req.isAuthenticated()) return res.json({ user: req.user });
-  res.status(401).json({ error: "Not authenticated" });
-});
+app.use("/auth", authRoutes); // Added
 
-// Export the app for Vercel serverless
 module.exports = app;
+  
