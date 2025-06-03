@@ -2,7 +2,7 @@ import React from 'react';
 
 const Login = () => {
   const loginWithGoogle = () => {
-    window.location.href = "https://xeno-crm-xd8e.vercel.app/auth/google";
+    window.location.href = "https://xeno-crm-2mi6.vercel.app/auth/google";
   };
 
   return (
