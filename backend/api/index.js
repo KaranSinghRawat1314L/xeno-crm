@@ -26,16 +26,18 @@ app.use(cors({
   credentials: true
 }));
 app.use(session({
-  secret: process.env.SESSION_SECRET || "your-secret-key",
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: {
-    secure: process.env.NODE_ENV === "production", // true if using HTTPS
-    sameSite: "lax"
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: 'lax',
+    maxAge: 24 * 60 * 60 * 1000,
   }
 }));
-app.use(passport.initialize()); // Added
-
+app.use(passport.initialize());
+app.use(passport.session());
 // MongoDB connection
 if (!mongoose.connection.readyState) {
   mongoose.connect(process.env.MONGO_URI)
