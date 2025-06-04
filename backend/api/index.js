@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
 const session = require("express-session");
-const MongoStore = require('connect-mongo')(session);
+const MongoStore = require('connect-mongo');
 require("dotenv").config();
 
 // Import your route files
@@ -30,7 +30,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
+  store: new MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   cookie: {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
