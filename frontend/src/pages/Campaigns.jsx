@@ -20,17 +20,17 @@ export default function Campaigns() {
   const removeRule = (i) => setRules(rules.filter((_, idx) => idx !== i));
 
   const previewAudience = async () => {
-    const res = await axios.post("http://localhost:5000/api/campaigns/preview", { rules }, { withCredentials: true });
+    const res = await axios.post("https://xeno-crm-q2dv.vercel.app/campaigns/preview", { rules }, { withCredentials: true });
     setAudience(res.data.audienceSize);
   };
 
   const suggestMessage = async () => {
-    const res = await axios.post("https://xeno-crm-xd8e.vercel.app/api/ai/message", { objective: name }, { withCredentials: true });
+    const res = await axios.post("https://xeno-crm-q2dv.vercel.app/api/ai/message", { objective: name }, { withCredentials: true });
     setAiMessage(res.data.suggestion);
   };
 
   const createCampaign = async () => {
-    await axios.post("http://localhost:5000/api/campaigns", {
+    await axios.post("https://xeno-crm-q2dv.vercel.app/api/campaigns", {
       name,
       rules,
       createdBy: "admin@example.com",
@@ -45,7 +45,7 @@ export default function Campaigns() {
   };
 
   const loadCampaigns = async () => {
-    const res = await axios.get("http://localhost:5000/api/campaigns", { withCredentials: true });
+    const res = await axios.get("https://xeno-crm-q2dv.vercel.app/api/campaigns", { withCredentials: true });
     setCampaigns(res.data.campaigns);
     setLogs(res.data.logs);
   };
