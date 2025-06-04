@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 const passport = require("passport");
 const session = require("express-session");
+const MongoStore = require('connect-mongo')(session);
 require("dotenv").config();
 
 // Import your route files
