@@ -25,7 +25,7 @@ export default function Campaigns() {
   };
 
   const suggestMessage = async () => {
-    const res = await axios.post("http://localhost:5000/api/ai/message", { objective: name }, { withCredentials: true });
+    const res = await axios.post("https://xeno-crm-xd8e.vercel.app/api/ai/message", { objective: name }, { withCredentials: true });
     setAiMessage(res.data.suggestion);
   };
 
