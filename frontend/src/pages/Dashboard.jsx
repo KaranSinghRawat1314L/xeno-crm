@@ -12,7 +12,7 @@ export default function Dashboard() {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const res = await axios.get("https://xeno-crm-xd8e.vercel.app/api/dashboard/stats", { withCredentials: true });
+        const res = await axios.get("https://xeno-crm-q2dv.vercel.app/api/dashboard/stats", { withCredentials: true });
         setStats(res.data);
       } catch (e) {}
       setLoading(false);
